@@ -1,0 +1,50 @@
+<div class="container">
+
+  <mdb-card>
+    <app-loader *ngIf="showLoader"></app-loader>
+    <mdb-card-body>
+        
+        <div *ngIf="!showLoader">
+            <div class="row">
+              <div class="col-md-4 offset-md-1">
+                  <img src="{{ user.photo }}" alt="user_image" style="border-radius: 50%; max-width: 200px">
+              </div>
+              <div class="username col-md-7">
+                  <h1> {{ user.name }} </h1>
+              </div>
+            </div>
+
+            <hr class="my-2">
+              
+            <div id="details-content" class="row">
+                <h1> Repositórios </h1>
+                <table mdbTable hover="true" id="details-table">
+                    <thead>
+                      <tr>
+                        <th> Repositório </th>
+                        <th> Link </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr mdbTableCol *ngFor="let repo of user.repos">
+                        <td>{{ repo.full_name}}</td>
+                        <td> <a href="{{ repo.html_url }}" target="_blank">Acessar página</a> </td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+
+                        <tr>
+                          <td colspan="4">
+                            <mdb-table-pagination (nextPageClick)="onNextPageClick($event)" (previousPageClick)="onPreviousPageClick($event)">
+                            </mdb-table-pagination>
+                          </td>
+                        </tr>
+                    
+                      </tfoot>
+                  </table>
+            </div>
+          </div>
+
+    </mdb-card-body>
+  </mdb-card>
+</div>

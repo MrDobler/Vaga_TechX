@@ -1,0 +1,16 @@
+mdb-card-body {
+    padding: 0;
+}
+
+mdb-card {
+    margin-bottom: 30px;
+}
+
+#brand {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#brand h2 {
+    margin-top: 10px;
+}
