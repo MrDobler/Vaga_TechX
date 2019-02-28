@@ -8,13 +8,14 @@ import { UserService } from '../../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  private users: Array<Object> = [];
-  private login: string = "";
-  private showLoader: boolean = true;
+  users: Array<Object> = [];
+  login: string = "";
+  showLoader: boolean = true;
   headElements = ['ID', 'Username', 'Ação'];
-  firstUserIdList: Array<any> = [0];
+  firstUserIdList: Array<any> = [0]; //Pilha para o controle do primeiro usuário da paginação.
   startUserId: number = 0;
   lastUserId: number = 0;
+  currentPage: number = 1;
 
 
 
@@ -34,13 +35,12 @@ export class UserListComponent implements OnInit {
     this.userService.userList(userId).subscribe(githubUsers => {
       this.users = (githubUsers as Array<Object>);
       this.showLoader = false;
-      let lastUserPos = this.users.length - 1;
-      let lastUser:any = this.users[lastUserPos];
-      this.lastUserId = lastUser.id;
+      this.lastUserId = this.getLastUserId(this.users);
     });
   }
 
   toNextPage() {
+    console.log(this.users);
     this.getUsers(this.lastUserId);
     this.firstUserIdList.push(this.lastUserId);
   }
@@ -49,7 +49,12 @@ export class UserListComponent implements OnInit {
     let previous;
 
     this.firstUserIdList.length > 1 ? previous = this.firstUserIdList.pop() : previous = 0;
-
     this.getUsers(previous);
+  }
+
+  private getLastUserId(users: Array<Object>) {
+    let lastUserPos = this.users.length - 1;
+    let lastUser:any = this.users[lastUserPos];
+    return lastUser.id;
   }
 }
