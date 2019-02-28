@@ -11,7 +11,8 @@ import {
   ButtonsModule,
   WavesModule, 
   CardsFreeModule, 
-  TableModule
+  TableModule,
+  IconsModule
 }
 from 'angular-bootstrap-md';
 
@@ -31,7 +32,8 @@ from 'angular-bootstrap-md';
     ButtonsModule,
     WavesModule,
     CardsFreeModule,
-    TableModule
+    TableModule,
+    IconsModule
   ]
 })
 export class UserModule { }

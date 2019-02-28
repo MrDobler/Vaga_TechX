@@ -12,50 +12,44 @@ export class UserListComponent implements OnInit {
   private login: string = "";
   private showLoader: boolean = true;
   headElements = ['ID', 'Username', 'Ação'];
-  firstUserId: number;
+  firstUserIdList: Array<any> = [0];
+  startUserId: number = 0;
+  lastUserId: number = 0;
 
 
-  constructor(public userService: UserService) {
-    this.firstUserId = 1;
-  }
+
+  constructor(public userService: UserService) {}
 
   ngOnInit() {
-    this.getUsers();
+    this.getUsers(this.startUserId);
   }
   
 
   /**
-   * Usando o último id do usuário devido
+   * Usando o primeiro e último id do usuário devido
    * ao github apenas me disponibilizar 
    * o parametro "since" para a paginação.
    */
-  getUsers() {
-    this.userService.userList().subscribe(githubUsers => {
+  getUsers(userId) {
+    this.userService.userList(userId).subscribe(githubUsers => {
       this.users = (githubUsers as Array<Object>);
       this.showLoader = false;
       let lastUserPos = this.users.length - 1;
       let lastUser:any = this.users[lastUserPos];
-      let firstUser:any = this.users[0];
-      this.firstUserId = firstUser.id;
-      console.log(lastUser.id);
-      // console.log(this.lastUserId);
-    },
-    error => {
-      console.log(error);
+      this.lastUserId = lastUser.id;
     });
   }
 
-  // changePage(page) {
-  //   this.showLoader = true;
-  //   this.userService.nextPage(page).subscribe(githubUsers => {
-  //     this.users = (githubUsers as Array<Object>);
-  //     this.showLoader = false;
-  //   });
-  // }
+  toNextPage() {
+    this.getUsers(this.lastUserId);
+    this.firstUserIdList.push(this.lastUserId);
+  }
 
-  // showDetails(login: string) {
-  //   console.log(login);
-  //   // this.emitter.emit(login);
-  // }
+  toPrevPage() {  
+    let previous;
 
+    this.firstUserIdList.length > 1 ? previous = this.firstUserIdList.pop() : previous = 0;
+
+    this.getUsers(previous);
+  }
 }

@@ -11,17 +11,12 @@ export class UserService {
   constructor(private http: HttpClient) { }
  
 
-  userList() {
-    return this.http.get(`${this.API_URL}/users`);
+  userList(page) {
+    return this.http.get(`${this.API_URL}/users?since=${page}&per_page=10`);
   }
 
-  userDetails(userName : string) {
-    return this.http.get(`${this.API_URL}/users/${userName}/repos`);
+  userDetails(userName : string, page) {
+    return this.http.get(`${this.API_URL}/users/${userName}/repos?page=${page}&per_page=10`);
   }
-
-  nextPage(page) {
-    return this.http.get(`${this.API_URL}/users?page=${page}&per_page=10`);
-  }
-
   
 }

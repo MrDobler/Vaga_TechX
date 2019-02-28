@@ -33,6 +33,26 @@
                         </td> 
                       </tr>
                     </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                      <nav aria-label="Page navigation example">
+                          <div class="col-md-12">
+                              <ul class="pagination pg-blue">
+                                <li class="page-item">
+                                  <a class="page-link"  mdbWavesEffect (click)="toPrevPage()">Anterior</a>
+                                </li>
+  
+                                <li class="page-item active">
+                                  <a class="page-link" mdbWavesEffect><mdb-icon fas icon="infinity"></mdb-icon><span class="sr-only">(current)</span></a>
+                                </li>
+      
+                                <li class="page-item">
+                                  <a class="page-link" mdbWavesEffect (click)="toNextPage()">Próximo</a>
+                                </li>
+                              </ul>
+                            </div>
+                         </nav>
+
+                      </tfoot>
                   </table>
                 </div>
           </mdb-card-body>

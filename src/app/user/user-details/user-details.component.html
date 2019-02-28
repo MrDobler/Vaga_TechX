@@ -3,7 +3,6 @@
   <mdb-card>
     <app-loader *ngIf="showLoader"></app-loader>
     <mdb-card-body>
-        
         <div *ngIf="!showLoader">
             <div class="row">
               <div class="col-md-4 offset-md-1">
@@ -17,8 +16,10 @@
             <hr class="my-2">
               
             <div id="details-content" class="row">
+
                 <h1> Repositórios </h1>
                 <table mdbTable hover="true" id="details-table">
+
                     <thead>
                       <tr>
                         <th> Repositório </th>
@@ -32,14 +33,21 @@
                       </tr>
                     </tbody>
                     <tfoot class="grey lighten-5 w-100">
-
-                        <tr>
-                          <td colspan="4">
-                            <mdb-table-pagination (nextPageClick)="onNextPageClick($event)" (previousPageClick)="onPreviousPageClick($event)">
-                            </mdb-table-pagination>
-                          </td>
-                        </tr>
-                    
+                          <nav aria-label="Page navigation example">
+                              <ul class="pagination pg-blue">
+                                <li class="page-item">
+                                  <a class="page-link" tabindex="-1" mdbWavesEffect (click)="toPrevPage()">Anterior</a>
+                                </li>
+  
+                                <li class="page-item active">
+                                  <a class="page-link" mdbWavesEffect> {{ nextPage }} <span class="sr-only">(current)</span></a>
+                                </li>
+      
+                                <li class="page-item">
+                                  <a class="page-link" mdbWavesEffect (click)="toNextPage()">Próximo</a>
+                                </li>
+                              </ul>
+                         </nav>
                       </tfoot>
                   </table>
             </div>
