@@ -15,9 +15,6 @@ export class UserListComponent implements OnInit {
   firstUserIdList: Array<any> = [0]; //Pilha para o controle do primeiro usuário da paginação.
   startUserId: number = 0;
   lastUserId: number = 0;
-  currentPage: number = 1;
-
-
 
   constructor(public userService: UserService) {}
 
