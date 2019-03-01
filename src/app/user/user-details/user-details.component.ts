@@ -18,6 +18,7 @@ export class UserDetailsComponent implements OnInit {
   previousPage: number;
   noDataWarning: boolean = false;
   showTableLoader: boolean = false;
+  hasFowardRepos: boolean = true;
 
   constructor(private route: ActivatedRoute, private userService: UserService) { 
     this.user.name = this.route.snapshot.paramMap.get('login'); 
@@ -38,6 +39,7 @@ export class UserDetailsComponent implements OnInit {
         this.showLoader = false;
       } else {
         this.previousPage = this.nextPage - 1;
+        this.hasFowardRepos = false;
       }
 
       this.showTableLoader = false;
@@ -45,12 +47,15 @@ export class UserDetailsComponent implements OnInit {
   }
 
   toNextPage() {
-    this.showTableLoader = true;
-    this.getUserData(++this.nextPage);
-    this.previousPage = (this.nextPage - 1);
+    if (this.hasFowardRepos) {
+      this.showTableLoader = true;
+      this.getUserData(++this.nextPage);
+      this.previousPage = (this.nextPage - 1);
+    }
   }
 
   toPrevPage() {
+    this.hasFowardRepos = true;
     if (this.previousPage >= this.startPage && this.nextPage != this.startPage) {
       this.showTableLoader = true;
       --this.nextPage;
