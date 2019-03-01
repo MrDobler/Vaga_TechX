@@ -19,6 +19,16 @@ mdb-card {
     color: #2d2d2d;
 }
 
+table {
+    position: relative;
+}
+
 tfoot nav {
     padding-top: 15px;
+}
+
+table app-loader {
+    position: absolute;
+    top: 45%;
+    left: 45%;
 }

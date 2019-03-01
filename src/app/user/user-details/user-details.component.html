@@ -19,7 +19,7 @@
 
                 <h1> Repositórios </h1>
                 <table mdbTable hover="true" id="details-table">
-
+                    <app-loader *ngIf="showTableLoader"></app-loader>
                     <thead>
                       <tr>
                         <th> Repositório </th>

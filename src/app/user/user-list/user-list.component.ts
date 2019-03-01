@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   firstUserIdList: Array<any> = [0]; //Pilha para o controle do primeiro usuário da paginação.
   startUserId: number = 0;
   lastUserId: number = 0;
+  showTableLoader: boolean = false;
 
   constructor(public userService: UserService) {}
 
@@ -33,18 +34,19 @@ export class UserListComponent implements OnInit {
       this.users = (githubUsers as Array<Object>);
       this.showLoader = false;
       this.lastUserId = this.getLastUserId(this.users);
+      this.showTableLoader = false;
     });
   }
 
   toNextPage() {
-    console.log(this.users);
+    this.showTableLoader = true;
     this.getUsers(this.lastUserId);
     this.firstUserIdList.push(this.lastUserId);
   }
 
   toPrevPage() {  
     let previous;
-
+    this.showTableLoader = true;
     this.firstUserIdList.length > 1 ? previous = this.firstUserIdList.pop() : previous = 0;
     this.getUsers(previous);
   }

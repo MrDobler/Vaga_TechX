@@ -18,7 +18,8 @@
     <div class="row">
         <mdb-card-body>
             <div class="col-md-12">
-                <table mdbTable bordered="true">
+              <table mdbTable bordered="true">
+                  <app-loader *ngIf="showTableLoader"></app-loader>
                     <thead>
                       <tr>
                         <th *ngFor="let head of headElements" scope="col">{{head}} </th>
